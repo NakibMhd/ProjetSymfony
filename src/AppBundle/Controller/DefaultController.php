@@ -17,8 +17,16 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $Formations = $em->getRepository('AppBundle:Formation')
-            ->findAll();
+        #$Formations = $em->getRepository('AppBundle:Formation')
+        #    ->findAll();
+
+        $Formations = $em->createQueryBuilder()
+            ->select('p')
+            ->from('AppBundle:Formation', 'p')
+            ->addOrderBy('p.DateFin', 'DESC')
+            ->getQuery()
+            ->getResult();
+
         $Competences = $em->getRepository('AppBundle:Competence')
             ->findAll();
 
