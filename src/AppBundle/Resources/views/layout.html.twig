@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% block style %}
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            background-color: #efebe9;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+{% block nav %}
+<nav class="nav-extended brown darken-1">
+    <div class="nav-wrapper">
+        <a href={{ path('homepage') }} class="brand-logo">NM</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href={{ path('blog') }}>Blog</a></li>
+            <li><a href={{ path('contact') }}>Contact</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li><a href={{ path('blog') }}>Blog</a></li>
+            <li><a href={{ path('contact') }}>Contact</a></li>
+        </ul>
+    </div>
+    <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#presentation">Présentation</a></li>
+            <li class="tab"><a href="#formations">Formations</a></li>
+            <li class="tab"><a href="#competences">Compétences</a></li>
+            <li class="tab"><a href="#realisations">Réalisations</a></li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+<div class="container">
+    {% block body %}
+
+        {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashBag.all %}
+                {% for message in messages %}
+                    <div class="{{ type }}">
+                        {{ message|trans({}, 'FOSUserBundle') }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    {% endblock %}
+    {% block javascript %}{% endblock %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</div>
+</body>
+</html>

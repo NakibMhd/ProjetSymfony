@@ -1,0 +1,35 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block nav %}
+    <nav class="brown darken-1">
+        <div class="nav-wrapper">
+            <a href={{ path('homepage') }} class="brand-logo">NM</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href={{ path('contact') }}>Contact</a></li>
+                <li><a href={{ path('homepage') }}>Mon CV</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+{% block body %}
+    {{ parent() }}
+    {% for BlogPost in BlogPosts %}
+        <div class="row">
+            <div class="col s12 m7">
+                <div class="card">
+                    <div class="card-image">
+                        <img src={{ asset('assets/images/blog.jpg') }}>
+                        <span class="card-title">{{ BlogPost.title }}</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="truncate">{{ BlogPost.body }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ path('show_post', {'id': BlogPost.id}) }}">Lire l'article</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

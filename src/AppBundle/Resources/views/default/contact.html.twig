@@ -1,0 +1,13 @@
+{% extends 'AppBundle::layout.html.twig' %}
+{% block nav %}
+    <nav class="brown darken-1">
+        <div class="nav-wrapper">
+            <a href={{ path('homepage') }} class="brand-logo">NM</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href={{ path('blog') }}>Blog</a></li>
+                <li><a href={{ path('homepage') }}>Mon CV</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
