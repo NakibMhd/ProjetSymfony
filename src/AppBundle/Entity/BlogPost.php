@@ -139,14 +139,5 @@ class BlogPost
         return $this->draft;
     }
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $created;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    protected $updated;
 }
 
